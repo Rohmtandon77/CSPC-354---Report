@@ -1,0 +1,12 @@
+?start: exp
+?exp: exp "+" exp   -> add
+    | exp "*" exp   -> multiply
+    | exp "^" exp   -> power
+    | exp "-" exp   -> subtract
+    | "-" exp       -> negate
+    | "log" exp "base" exp -> log
+    | "(" exp ")"   -> parenthesis
+    | NUMBER        -> number
+
+%import common.NUMBER
+%ignore " "
