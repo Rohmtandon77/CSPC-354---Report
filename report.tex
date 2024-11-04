@@ -1,0 +1,533 @@
+\documentclass{article}
+
+\usepackage{tikz} 
+\usetikzlibrary{automata, positioning, arrows} 
+
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       % color of external links using \href
+    linkcolor= blue,       % color of internal links 
+    citecolor= blue,       % color of links to bibliography
+    filecolor= blue,        % color of file links
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newtheoremstyle{theorem}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\itshape\/}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {}          % CUSTOM-HEAD-SPEC
+\theoremstyle{theorem} 
+   \newtheorem{theorem}{Theorem}[section]
+   \newtheorem{corollary}[theorem]{Corollary}
+   \newtheorem{lemma}[theorem]{Lemma}
+   \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+   \newtheorem{definition}[theorem]{Definition}
+   \newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}    
+  \newtheorem{remark}[theorem]{Remark}
+
+\title{CPSC-354 Report}
+\author{Rohm Tandon  \\ Chapman University}
+
+\date{07/01/2024} 
+
+\begin{document}
+
+\maketitle 
+
+\begin{abstract}
+This report contains assignments throughout the fall 2024 semester and is intended for the purpose of documenting my work and showing my progress in CPSC 354 - Programming Languages, taught by Jonathan Weinberg.
+\end{abstract}
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+\section{Introduction}\label{intro}
+
+This report, prepared for CPSC 354 - Programming Languages at Chapman University, is a comprehensive account of my academic voyage over the semester. It includes a detailed compilation of my notes, homework solutions, and critical reflections on the coursework. This report serves as a bridge between the theoretical knowledge imparted in lectures and the practical skills essential for future pursuits in both graduate studies and the software industry.
+
+\section{Week by Week}\label{homework}
+
+\subsection{Week 1}
+
+\subsubsection*{Notes}
+
+In week 1 we learnt about Lean as a programming language and its correlation to discrete math. We also learnt about other proof assistants. We then shifted our focus to the NNG tutorial world as you can see below.
+
+\subsubsection*{Homework}
+
+Tutorial world 
+
+Level 5: 
+\includegraphics[width=0.5\textwidth]{Tutorial_level_5.png}
+
+Discrete math's lemmas tell us that anything added to 0 will give the result of that number itself. So; A+0=A. 
+Using this we can bring the left hand side down to a+b+c. 
+From here we can use the property of reflexivity to show that both sides are equal, hence solving the puzzle. 
+
+Level 6:
+\includegraphics[width=0.5\textwidth]{Tutorial_level_6.png}
+
+Level 7:
+\includegraphics[width=0.5\textwidth]{Tutorial_level_7.png}
+
+Level 8:
+\includegraphics[width=0.5\textwidth]{Tutorial_level_8.png}
+
+
+\subsection{Week 2}
+
+\subsubsection*{Notes}
+
+In week 2 we learnt about recursion and its application in other problems such as the Towers of Hanoi game we played. We also learnt about its various benefits such as breaking down complexity of problems and being more concise.
+
+\subsubsection*{Homework}
+
+Addition world
+
+Level 1: 
+\includegraphics[width=0.5\textwidth]{Addition_world_level_1.png}
+
+Level 2: 
+\includegraphics[width=0.5\textwidth]{Addition_world_level_2.png}
+
+Level 3:
+\includegraphics[width=0.5\textwidth]{Addition_world_level_3.png}
+
+Level 4:
+\includegraphics[width=0.5\textwidth]{Addition_world_level_4.png}
+
+Using induction on c we can initially create an easier medium to use reflexivity to solve for a+b. Then solving the other side we just use the mathematical definiton of a successor function, until we can use the induction again to get the equation to the point where we can use reflexivity to prove it. This is a clear example of mathematical prrofs by induction.
+
+Level 5:
+\includegraphics[width=0.5\textwidth]{Addition_world_level_5.png}
+
+Once again this is proof by mathematical induction similar to the previous one. This time we add the zeroes and then use reflexivity for the first part of the proof. Then to prove the second part we use the successor function until bringing back the induction we used like the previous question. Then to complete the proof we use reflexivity again. 
+
+-
+
+Discord Question: Since recursion has so many benefits and also breaks down the complexity of problems, why aren't we taught to use it as our primary method? In other words, why isn't it the first method of problem solving we're taught?
+
+\subsection{Week 3}
+\subsubsection*{Notes}
+In week 3 we spoke about recursion further, and focused on our calculators in python. Eventually connecting the dots for our first Assignment that was due at the same time as Homework 4, where I used recursion in my python calculator in order to get it to function as efficiently as possible. We also discussed parsing, and derivation trees which is what we practiced in Homework 4.
+
+\subsubsection*{Homework}
+For homework 4 we did some practice on derivation trees for the strings you can see in the handwritten work below, along with the respective answers;
+
+\includegraphics[width=0.5\textwidth]{HW4.JPG}
+
+Discord Question: Why do programming languages need different types of parsers, and how does this choice impact the way a computer understands the code?
+
+\subsection{Week 4}
+\subsubsection*{Notes}
+In week 4 we spoke about parsing and trees further which is what we practiced in last weeks Homework. But now we delved into the more notation heavy side of it. This weeks homework contained the lean logic game that helped us put some of that into practice.
+
+\subsubsection*{Homework}
+For homework 5 we completed the Lean logic game tutorial world. I have provided the answers to the same below. 
+
+\begin{enumerate}
+  \item \textbf{Exhibit evidence that you're planning a party.}
+
+  \textbf{Level 1:}
+  \begin{verbatim}
+  example (P : Prop) (todo_list : P) : P := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact todo_list
+  \end{verbatim}
+
+  \textbf{Level 2:}
+  \begin{verbatim}
+  example (P S : Prop) (p : P) (s : S) : P ∧ S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact and.intro p s
+  \end{verbatim}
+
+  \textbf{Level 3:}
+  \begin{verbatim}
+  example (A I O U : Prop) (a : A) (i : I) (o : O) (u : U) : (A ∧ I) ∧ O ∧ U := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have ou := and_intro o u
+  have ai := and_intro a i
+  exact and_intro ai ou
+  \end{verbatim}
+
+  \textbf{Level 4:}
+  \begin{verbatim}
+  example (P S : Prop)(vm: P ∧ S) : P := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact vm.left
+  \end{verbatim}
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  example (P Q : Prop)(h: P ∧ Q) : Q := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact h.right
+  \end{verbatim}
+
+  \textbf{Level 6:}
+  \begin{verbatim}
+  example (A I O U : Prop)(h1 : A ∧ I)(h2 : O ∧ U) : A ∧ U := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact and_intro h1.left h2.right
+  \end{verbatim}
+
+  \textbf{Level 7:}
+  \begin{verbatim}
+  example (C L : Prop)(h: (L ∧ (((L ∧ C) ∧ L) ∧ L ∧ L ∧ L)) ∧ (L ∧ L) ∧ L) : C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have a:= h.left
+  have b:= a.right
+  have c:= b.left
+  have d:= c.left
+  exact d.right
+  \end{verbatim}
+
+  \textbf{Level 8:}
+  \begin{verbatim}
+  example (A C I O P S U : Prop)(h: ((P ∧ S) ∧ A) ∧ ¬I ∧ (C ∧ ¬O) ∧ ¬U) : A ∧ C ∧ P ∧ S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have a:=h.left
+  have fin:=a.left
+  have a:=a.right
+  have r:=h.right
+  have t:=r.right
+  have k:= t.left
+  have c:=k.left
+  have e:= and_intro c fin
+  exact and_intro a e
+  
+
+  Explanation for Solution 8: 
+
+  We ultimately need A ∧ C ∧ P ∧ S, which means that we need to retrieve A, C, P, and S from the 
+  original expression h. 
+
+  (1) Seeing that A, P and S are on the left side of h-> extract h.left to get (P ∧ S) ∧ A.
+  (2) Seeing that (P ∧ S) i already clearly made on the left side we can store (P ∧ S) together as 
+      'fin' by extracting the left side.
+  (3) Now from the same expression we can extract the right side to retrieve and store A as 'a'.
+  (4) Now that we have A, P and S stored and easily accessible, we need C from right side of h.
+  (5) After storing h.right in another expression, 'r', we take the right side of r to further 
+      narrow down the position of C.
+  (6) Now we take the left side of that expression for the same purpose, store it as k.
+  (7) Finally we can retrieve C by storing the k.left as 'c'.
+  (8) Now to finally present our solution we can start by using and_intro on c and fin, storing 
+      that as e.
+  (9) To complete our solution we use exact and_intro on a and e.
+
+
+  \end{verbatim}
+\end{enumerate}
+
+
+Discord Question: How does the choice of a parsing technique (e.g., top-down vs. bottom-up) impact the efficiency and clarity of the resulting derivation tree? In other words, when should I choose between the two approaches so that my chosen approach is significantly more beneficial than the other?
+
+\subsection{Week 5}
+\subsubsection*{Notes}
+In week 5 we spoke about type theory in programming languages. Moreover, we spoke about proposition types, constructive logic, and functional programming. We also furthered our understanding of the lean logic that helped me understand some parts of the homework as well.
+
+\subsubsection*{Homework}
+For homework 6 we completed the Lean logic game on implication. I have provided the answers to the same below. 
+
+\begin{enumerate}
+  \item \textbf{Exhibit evidence that cake will be delivered to the party}
+
+  \textbf{Level 1:}
+  \begin{verbatim}
+  example (P C: Prop)(p: P)(bakery_service : P → C) : C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact(bakery_service p)
+  \end{verbatim}
+
+  \textbf{Level 2:}
+  \begin{verbatim}
+  example (C: Prop) : C → C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact λ h : C => h
+  \end{verbatim}
+
+  \textbf{Level 3:}
+  \begin{verbatim}
+  example (I S: Prop) : I ∧ S → S ∧ I := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact λ h : I ∧ S => and_intro (and_right h) h.left
+  \end{verbatim}
+
+  \textbf{Level 4:}
+  \begin{verbatim}
+  example (C A S: Prop) (h1 : C → A) (h2 : A → S) : C → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+    exact λ h : C => h2 (h1 h)
+  \end{verbatim}
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  example (P Q R S T U: Prop) (p : P) (h1 : P → Q) (h2 : Q → R) (h3 : Q → T) (h4 : S → T) 
+  (h5 : T → U)
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact h5 ( h3 (  h1 p))
+  \end{verbatim}
+
+  \textbf{Level 6:}
+  \begin{verbatim}
+  example (C D S: Prop) (h : C ∧ D → S) : C → D → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun f : C => fun b : D => h ⟨f, b⟩
+  \end{verbatim}
+
+  \textbf{Level 7:}
+  \begin{verbatim}
+  example (C D S: Prop) (h : C → D → S) : C ∧ D → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun f : C ∧ D => h f.left f.right
+  \end{verbatim}
+
+  \textbf{Level 8:}
+  \begin{verbatim}
+  example (C D S : Prop) (h : (S → C) ∧ (S → D)) : S → C ∧ D := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun s : S => and_intro (h.left s) (  h.right s)
+  \end{verbatim}
+
+  \textbf{Level 9:}
+  \begin{verbatim}
+  example (R S : Prop) : R → (S → R) ∧ (¬S → R) := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun r : R => and_intro (fun s : S => r) (  fun ss: ¬S => r)
+  \end{verbatim}
+\end{enumerate}
+
+Discord Question: How can implication be used in functional programming, and more so, why is it not as seemingly embedded in some of the popular languages we use today?
+
+\subsection{Week 6}
+\subsubsection*{Notes}
+In week 6 we spoke about Lambda Reduction and practiced a few questions to improve our understanding of the same.
+
+\subsubsection*{Homework}
+For homework 7 we discussed some theory related to capture avoiding substitution by reducing a lambda term. Then we read and discussed Church numerals.
+
+\begin{enumerate}
+  \item \textbf{ The purpose of this hw is to practice capture avoiding substitution. }
+  
+  \textbf{Question 1:}
+  \begin{Reduce the following lambda term: ((\m.\n.mn)(\f.\x.f(fx)))(\f.\x.f(f(fx)))}
+  
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  - (\n.(\f.\x.f(fx))n)(\f.\x.f(f(fx)))
+  - (\f.\x.f(fx))(\f.\x.f(f(fx)))
+  - \x.((\f.\x.f(f(fx)))(f(fx)))
+
+  Capture avoiding substitution is the practice of performing substitutions in lambda calculus, 
+  while ensuring that no variables are "captured" by new bindings. In other words, if we 
+  substitute a variable in an expression, we should not accidentally bind it to a lambda term 
+  that already uses that variable in a different scope.
+  This yields the result: \x.((\f.\x.f(f(fx)))((\f.\x.f(f(fx)))x))
+  \end{verbatim}
+
+  \textbf{Question 2:}
+  \begin{ Explain what function on natural numbers (\m. \n. m n) implements.}
+
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  
+    Given \m.\n.mn, let's interpret it in terms of Church numerals.
+    This function takes two Church numerals, m and n.
+    This function implements addition for Church numerals. It combines the number of applications 
+    of f in m and n, resulting in m + n.
+    So this function represents the addition function in Church numerals.
+
+  \end{verbatim}
+
+\end{enumerate}
+
+Discord Question: When performing capture-avoiding substitution, we often rename bound variables to avoid conflicts. How might this affect the efficiency or complexity of the substitution operation?
+
+\subsection{Week 7}
+\subsubsection*{Notes}
+In week 7 we spoke more about beta reduction and dove into reducing expressions with Church numerals. Overall, we went over Turing completeness and the connection between that and our previous topic of Church numerals.
+
+
+\subsection{Week 8}
+\subsubsection*{Notes}
+In week 8 we spoke about different reduction strategies - by value and by name. We also looked at the VSCode debugger and learnt about the importance of working with a debugger. We then tried to understand the interpreter and then used our learning of the different reduction strategies in our homework.
+
+\subsubsection*{Homework}
+For homework 8-9 we did Exercises 2-8 in https://hackmd.io/@alexhkurz/S1R1F6_1yx
+
+2) For a b c d, the reduction occurs in a left-associative manner: a b c d → (((a b) c) d). Each application applies the leftmost term to the next in sequence, creating nested applications.
+   For (a), it's a single variable wrapped in parentheses, which reduces to a as there are no further applications or abstractions.
+
+3) Capture-avoiding substitution ensures that when substituting a variable, it doesn't inadvertently capture free variables.
+   This involves renaming bound variables to prevent conflicts, a common issue in lambda calculus interpreters.
+   The substitute function receives three parameters: The expression in which substitution occurs, the variable being replaced, and the expression replacing the variable.
+   For application expressions (e.g., a b), it recursively applies substitution to both the function and argument. The Lambda abstraction is where the capture avoiding substitution comes into play.
+   The interpreter checks for conflicts, and a fresh variable name is generated to replace the conflicting bound variable. After renaming, substitution proceeds within the lambda body with the newly renamed variable.
+
+4) Generally, the interpreter provides the expected results when handling basic lambda expressions and straightforward applications. However, more complex expressions with multiple nested applications or ones that involve intricate substitutions may sometimes yield unexpected results if there are any implementation issues with capture-avoiding substitution or recursive application handling.
+   Not all computations reduce to normal form. Some expressions, particularly those involving self-application lead to infinite loops because they lack a terminating condition.
+   For other expressions designed to terminate, like Church numerals in basic operations, the interpreter generally reaches normal form as expected.
+
+5) An example of such an expression is the "omega combinator" 
+\begin{verbatim} ((\x. x x) (\x. x x)) \end{verbatim} 
+   which results in an infinite loop of self-application.
+   I added this to test.lc to observe this non-terminating behaviour in order to identify it as the MWE.
+
+6) I followed the instruction as per, for the next two items.
+
+7) The substitutions were seen at the breakpoints. A concise version of the same is below;
+    \begin{verbatim}
+      (\n.(m n))
+      (m n)
+      (m Var1)
+      ((\f.(\x.(f (f x)))) Var1)
+      (\f.(\x.(f (f x))))
+      (f (f x))
+      (f (f Var3))
+      (\Var3.(Var2 (Var2 Var3)))
+      (Var2 (Var2 Var3))
+      (Var2 Var3)
+      (Var2 (Var2 Var4))
+      (\Var4.(Var2 (Var2 Var4)))
+      (Var2 (Var2 Var4))
+      (Var2 (Var2 Var5))
+    \end{verbatim}
+
+8) The trace is written out below;
+    \begin{verbatim}
+      13 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+        40 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+        40 (\m.(\n.(m n)))
+          54 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+            46 (\Var1.((\f.(\x.(f (f x)))) Var1))
+              54 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+              54 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+            46 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+        40 (\Var2.(\Var4.(Var2 (Var2 Var4))))
+          54 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+            46 (\Var5.((\f.(\x.(f (f (f x))))) ((\f.(\x.(f (f (f x))))) Var5)))
+          54 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+          54 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+    \end{verbatim}
+
+Discord Question: Capture avoiding substitution seems to be a fundamental theme to lambda calculus interpreters, but I still have problems understanding how to best implement it in Python. What other resources can I use to further understand its implementation?
+
+\subsection{Week 9}
+\subsubsection*{Notes}
+In week 9 we continued to speak about the interpreter and modifying it. We also read about three languages - BLOOP, FLOOP, and GLOOP in order to further our understanding of recursion. 
+
+\subsubsection*{Homework}
+For homework 10 we reflected on the previous week's homework: 8-9, as well as our group programming assignment 3. My reflection is given below.
+
+1) I found keeping track of the trace was one of the most challenging parts of the homework. I was not completely sure of where exactly my breakpoints needed to be for exercise 7 and I had to do it multiple times to formulate a readable answer. However, this helped me understand what exctly was happening through the debugging process.
+2) We took our time with the exercise and then spoke about it as a group before coming up with our key insight, realising that our evaluation strategy really matters.
+3) My most intersting takeaway is that despite python being my most used language, there are still some seemingly necessary things that I am not aware of. I certainly want to master using these skills in order to be able to use them in my day to day coding. I rely on print statements more than I apparently should, and that is something I would have never expected to find out this way.
+
+Discord Question: Many developers rely on print statements, but it seems like breakpoints and the debug console can provide more control and insight. What is the best way to make the switch over to using those, and should I completely stop relying on print statements?
+
+
+\section{Lessons from the Assignments}
+
+
+\section{Conclusion}\label{conclusion}
+
+
+\begin{thebibliography}{99}
+\bibitem[BLA]{bla} Author, \href{https://en.wikipedia.org/wiki/LaTeX}{Title}, Publisher, Year.
+\end{thebibliography}
+
+\end{document}
