@@ -1,0 +1,1087 @@
+\documentclass{article}
+
+\usepackage{tikz} 
+\usetikzlibrary{automata, positioning, arrows} 
+
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       % color of external links using \href
+    linkcolor= blue,       % color of internal links 
+    citecolor= blue,       % color of links to bibliography
+    filecolor= blue,        % color of file links
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newtheoremstyle{theorem}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\itshape\/}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {}          % CUSTOM-HEAD-SPEC
+\theoremstyle{theorem} 
+   \newtheorem{theorem}{Theorem}[section]
+   \newtheorem{corollary}[theorem]{Corollary}
+   \newtheorem{lemma}[theorem]{Lemma}
+   \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+   \newtheorem{definition}[theorem]{Definition}
+   \newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}    
+  \newtheorem{remark}[theorem]{Remark}
+
+\title{CPSC-354 Report}
+\author{Rohm Tandon  \\ Chapman University}
+
+\date{07/01/2024} 
+
+\begin{document}
+
+\maketitle 
+
+\begin{abstract}
+This report contains assignments throughout the fall 2024 semester and is intended for the purpose of documenting my work and showing my progress in CPSC 354 - Programming Languages, taught by Jonathan Weinberg.
+\end{abstract}
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+\section{Introduction}\label{intro}
+
+This report, prepared for CPSC 354 - Programming Languages at Chapman University, is a comprehensive account of my academic voyage over the semester. It includes a detailed compilation of my notes, homework solutions, and critical reflections on the coursework. This report serves as a bridge between the theoretical knowledge imparted in lectures and the practical skills essential for future pursuits in both graduate studies and the software industry.
+
+\section{Week by Week}\label{homework}
+
+\subsection{Week 1}
+
+\subsubsection*{Notes}
+
+In week 1 we learnt about Lean as a programming language and its correlation to discrete math. We also learnt about other proof assistants. We then shifted our focus to the NNG tutorial world as you can see below.
+
+\subsubsection*{Homework}
+
+Tutorial world 
+\begin{enumerate}
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  example (a b c : ℕ) : a + (b + 0) + (c + 0) = a + b + c := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  rw [add_zero]
+  rw [add_zero]
+  rfl
+  \end{verbatim}
+  
+  Discrete math's lemmas tell us that anything added to 0 will give the result of that number itself. So; A+0=A. 
+  Using this we can bring the left hand side down to a+b+c. 
+  From here we can use the property of reflexivity to show that both sides are equal, hence solving the puzzle. 
+
+  \textbf{Level 6:}
+  \begin{verbatim}
+  example (a b c : ℕ) : a + (b + 0) + (c + 0) = a + b + c := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  rw [add_zero c]
+  rw [add_zero b]
+  rfl
+  \end{verbatim}
+
+  \textbf{Level 7:}
+  \begin{verbatim}
+  theorem succ_eq_add_one n : succ n = n + 1 := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  rw [one_eq_succ_zero]
+  rw [add_succ]
+  rw [add_zero]
+  rfl
+  \end{verbatim}
+
+  \textbf{Level 8:}
+  \begin{verbatim}
+  example : (2 : ℕ) + 2 = 4 := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  rw[four_eq_succ_three]
+  rw[three_eq_succ_two]
+  rw[two_eq_succ_one]
+  rw[one_eq_succ_zero]
+  rw[succ_eq_add_one]
+  rw[one_eq_succ_zero]
+  rw[add_succ]
+  rw[add_zero]
+  rw[add_succ]
+  rw[add_succ]
+  rw[add_zero]
+  rfl
+  \end{verbatim}
+
+\end{enumerate}
+
+\subsection{Week 2}
+
+\subsubsection*{Notes}
+
+In week 2 we learnt about recursion and its application in other problems such as the Towers of Hanoi game we played. We also learnt about its various benefits such as breaking down complexity of problems and being more concise.
+
+\subsubsection*{Homework}
+
+Addition world
+\begin{enumerate}
+
+  \textbf{Level 1:}
+  \begin{verbatim}
+  theorem zero_add (n : ℕ) : 0 + n = n := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  induction n with d hd
+  rw[add_zero]
+  rfl
+  rw[add_succ]
+  rw[hd]
+  rfl  
+  \end{verbatim}
+
+  \textbf{Level 2:}
+  \begin{verbatim}
+  theorem succ_add (a b : ℕ) : succ a + b = succ (a + b) := by  
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  induction b with d hd
+  rw[add_zero]
+  rw[add_zero]
+  rfl
+  rw[add_succ, add_succ]
+  rw[hd]
+  rfl
+  \end{verbatim}
+  
+  \textbf{Level 3:}
+  \begin{verbatim}
+  theorem add_comm (a b : ℕ) : a + b = b + a := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  induction b with d hd
+  rw[add_zero, zero_add]
+  rfl
+  rw[add_succ, succ_add, hd]
+  rfl
+  \end{verbatim}
+
+  \textbf{Level 4:}
+  \begin{verbatim}
+  theorem add_assoc (a b c : ℕ) : a + b + c = a + (b + c) := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  induction c with c hc
+  rw[add_zero, add_zero]
+  rfl
+  rw[add_succ, add_succ]
+  rw[add_succ]
+  rw[hc]
+  rfl
+  \end{verbatim}
+
+  Using induction on c we can initially create an easier medium to use reflexivity to solve for a+b. Then solving the other side we just use the mathematical definiton of a successor function, until we can use the induction again to get the equation to the point where we can use reflexivity to prove it. This is a clear example of mathematical prrofs by induction.
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  theorem add_right_comm (a b c : ℕ) : a + b + c = a + c + b := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  induction c with hc
+  rw[add_zero, add_zero]
+  rfl
+  rw[add_succ, add_succ]
+  rw[succ_add]
+  rw[n_ih]
+  rfl
+  \end{verbatim}
+
+  Once again this is proof by mathematical induction similar to the previous one. This time we add the zeroes and then use reflexivity for the first part of the proof. Then to prove the second part we use the successor function until bringing back the induction we used like the previous question. Then to complete the proof we use reflexivity again. 
+
+\end{enumerate}
+
+Discord Question: Since recursion has so many benefits and also breaks down the complexity of problems, why aren't we taught to use it as our primary method? In other words, why isn't it the first method of problem solving we're taught?
+
+\subsection{Week 3}
+\subsubsection*{Notes}
+In week 3 we spoke about recursion further, and focused on our calculators in python. Eventually connecting the dots for our first Assignment that was due at the same time as Homework 4, where I used recursion in my python calculator in order to get it to function as efficiently as possible. We also discussed parsing, and derivation trees which is what we practiced in Homework 4.
+
+\subsubsection*{Homework}
+For homework 4 we did some practice on derivation trees for the strings you can see in the handwritten work below, along with the respective answers;
+
+\includegraphics[width=0.5\textwidth]{HW4.JPG}
+
+Discord Question: Why do programming languages need different types of parsers, and how does this choice impact the way a computer understands the code?
+
+\subsection{Week 4}
+\subsubsection*{Notes}
+In week 4 we spoke about parsing and trees further which is what we practiced in last weeks Homework. But now we delved into the more notation heavy side of it. This weeks homework contained the lean logic game that helped us put some of that into practice.
+
+\subsubsection*{Homework}
+For homework 5 we completed the Lean logic game tutorial world. I have provided the answers to the same below. 
+
+\begin{enumerate}
+  \item \textbf{Exhibit evidence that you're planning a party.}
+
+  \textbf{Level 1:}
+  \begin{verbatim}
+  example (P : Prop) (todo_list : P) : P := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact todo_list
+  \end{verbatim}
+
+  \textbf{Level 2:}
+  \begin{verbatim}
+  example (P S : Prop) (p : P) (s : S) : P ∧ S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact and.intro p s
+  \end{verbatim}
+
+  \textbf{Level 3:}
+  \begin{verbatim}
+  example (A I O U : Prop) (a : A) (i : I) (o : O) (u : U) : (A ∧ I) ∧ O ∧ U := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have ou := and_intro o u
+  have ai := and_intro a i
+  exact and_intro ai ou
+  \end{verbatim}
+
+  \textbf{Level 4:}
+  \begin{verbatim}
+  example (P S : Prop)(vm: P ∧ S) : P := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact vm.left
+  \end{verbatim}
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  example (P Q : Prop)(h: P ∧ Q) : Q := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact h.right
+  \end{verbatim}
+
+  \textbf{Level 6:}
+  \begin{verbatim}
+  example (A I O U : Prop)(h1 : A ∧ I)(h2 : O ∧ U) : A ∧ U := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact and_intro h1.left h2.right
+  \end{verbatim}
+
+  \textbf{Level 7:}
+  \begin{verbatim}
+  example (C L : Prop)(h: (L ∧ (((L ∧ C) ∧ L) ∧ L ∧ L ∧ L)) ∧ (L ∧ L) ∧ L) : C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have a:= h.left
+  have b:= a.right
+  have c:= b.left
+  have d:= c.left
+  exact d.right
+  \end{verbatim}
+
+  \textbf{Level 8:}
+  \begin{verbatim}
+  example (A C I O P S U : Prop)(h: ((P ∧ S) ∧ A) ∧ ¬I ∧ (C ∧ ¬O) ∧ ¬U) : A ∧ C ∧ P ∧ S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  have a:=h.left
+  have fin:=a.left
+  have a:=a.right
+  have r:=h.right
+  have t:=r.right
+  have k:= t.left
+  have c:=k.left
+  have e:= and_intro c fin
+  exact and_intro a e
+  
+
+  Explanation for Solution 8: 
+
+  We ultimately need A ∧ C ∧ P ∧ S, which means that we need to retrieve A, C, P, and S from the 
+  original expression h. 
+
+  (1) Seeing that A, P and S are on the left side of h-> extract h.left to get (P ∧ S) ∧ A.
+  (2) Seeing that (P ∧ S) i already clearly made on the left side we can store (P ∧ S) together as 
+      'fin' by extracting the left side.
+  (3) Now from the same expression we can extract the right side to retrieve and store A as 'a'.
+  (4) Now that we have A, P and S stored and easily accessible, we need C from right side of h.
+  (5) After storing h.right in another expression, 'r', we take the right side of r to further 
+      narrow down the position of C.
+  (6) Now we take the left side of that expression for the same purpose, store it as k.
+  (7) Finally we can retrieve C by storing the k.left as 'c'.
+  (8) Now to finally present our solution we can start by using and_intro on c and fin, storing 
+      that as e.
+  (9) To complete our solution we use exact and_intro on a and e.
+
+
+  \end{verbatim}
+\end{enumerate}
+
+
+Discord Question: How does the choice of a parsing technique (e.g., top-down vs. bottom-up) impact the efficiency and clarity of the resulting derivation tree? In other words, when should I choose between the two approaches so that my chosen approach is significantly more beneficial than the other?
+
+\subsection{Week 5}
+\subsubsection*{Notes}
+In week 5 we spoke about type theory in programming languages. Moreover, we spoke about proposition types, constructive logic, and functional programming. We also furthered our understanding of the lean logic that helped me understand some parts of the homework as well.
+
+\subsubsection*{Homework}
+For homework 6 we completed the Lean logic game on implication. I have provided the answers to the same below. 
+
+\begin{enumerate}
+  \item \textbf{Exhibit evidence that cake will be delivered to the party}
+
+  \textbf{Level 1:}
+  \begin{verbatim}
+  example (P C: Prop)(p: P)(bakery_service : P → C) : C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact(bakery_service p)
+  \end{verbatim}
+
+  \textbf{Level 2:}
+  \begin{verbatim}
+  example (C: Prop) : C → C := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact λ h : C => h
+  \end{verbatim}
+
+  \textbf{Level 3:}
+  \begin{verbatim}
+  example (I S: Prop) : I ∧ S → S ∧ I := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact λ h : I ∧ S => and_intro (and_right h) h.left
+  \end{verbatim}
+
+  \textbf{Level 4:}
+  \begin{verbatim}
+  example (C A S: Prop) (h1 : C → A) (h2 : A → S) : C → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+    exact λ h : C => h2 (h1 h)
+  \end{verbatim}
+
+  \textbf{Level 5:}
+  \begin{verbatim}
+  example (P Q R S T U: Prop) (p : P) (h1 : P → Q) (h2 : Q → R) (h3 : Q → T) (h4 : S → T) 
+  (h5 : T → U)
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact h5 ( h3 (  h1 p))
+  \end{verbatim}
+
+  \textbf{Level 6:}
+  \begin{verbatim}
+  example (C D S: Prop) (h : C ∧ D → S) : C → D → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun f : C => fun b : D => h ⟨f, b⟩
+  \end{verbatim}
+
+  \textbf{Level 7:}
+  \begin{verbatim}
+  example (C D S: Prop) (h : C → D → S) : C ∧ D → S := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun f : C ∧ D => h f.left f.right
+  \end{verbatim}
+
+  \textbf{Level 8:}
+  \begin{verbatim}
+  example (C D S : Prop) (h : (S → C) ∧ (S → D)) : S → C ∧ D := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun s : S => and_intro (h.left s) (  h.right s)
+  \end{verbatim}
+
+  \textbf{Level 9:}
+  \begin{verbatim}
+  example (R S : Prop) : R → (S → R) ∧ (¬S → R) := by
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  exact fun r : R => and_intro (fun s : S => r) (  fun ss: ¬S => r)
+  \end{verbatim}
+\end{enumerate}
+
+Discord Question: How can implication be used in functional programming, and more so, why is it not as seemingly embedded in some of the popular languages we use today?
+
+\subsection{Week 6}
+\subsubsection*{Notes}
+In week 6 we spoke about Lambda Reduction and practiced a few questions to improve our understanding of the same.
+
+\subsubsection*{Homework}
+For homework 7 we discussed some theory related to capture avoiding substitution by reducing a lambda term. Then we read and discussed Church numerals.
+
+\begin{enumerate}
+  \item \textbf{ The purpose of this hw is to practice capture avoiding substitution. }
+  
+  \textbf{Question 1:}
+  \begin{Reduce the following lambda term: ((\m.\n.mn)(\f.\x.f(fx)))(\f.\x.f(f(fx)))}
+  
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  - (\n.(\f.\x.f(fx))n)(\f.\x.f(f(fx)))
+  - (\f.\x.f(fx))(\f.\x.f(f(fx)))
+  - \x.((\f.\x.f(f(fx)))(f(fx)))
+
+  Capture avoiding substitution is the practice of performing substitutions in lambda calculus, 
+  while ensuring that no variables are "captured" by new bindings. In other words, if we 
+  substitute a variable in an expression, we should not accidentally bind it to a lambda term 
+  that already uses that variable in a different scope.
+  This yields the result: \x.((\f.\x.f(f(fx)))((\f.\x.f(f(fx)))x))
+  \end{verbatim}
+
+  \textbf{Question 2:}
+  \begin{ Explain what function on natural numbers (\m. \n. m n) implements.}
+
+  \end{verbatim}
+
+  \textbf{Solution:}
+  \begin{verbatim}
+  
+    Given \m.\n.mn, let's interpret it in terms of Church numerals.
+    This function takes two Church numerals, m and n.
+    This function implements addition for Church numerals. It combines the number of applications 
+    of f in m and n, resulting in m + n.
+    So this function represents the addition function in Church numerals.
+
+  \end{verbatim}
+
+\end{enumerate}
+
+Discord Question: When performing capture-avoiding substitution, we often rename bound variables to avoid conflicts. How might this affect the efficiency or complexity of the substitution operation?
+
+\subsection{Week 7}
+\subsubsection*{Notes}
+In week 7 we spoke more about beta reduction and dove into reducing expressions with Church numerals. Overall, we went over Turing completeness and the connection between that and our previous topic of Church numerals.
+
+
+\subsection{Week 8}
+\subsubsection*{Notes}
+In week 8 we spoke about different reduction strategies - by value and by name. We also looked at the VSCode debugger and learnt about the importance of working with a debugger. We then tried to understand the interpreter and then used our learning of the different reduction strategies in our homework.
+
+\subsubsection*{Homework}
+For homework 8-9 we did Exercises 2-8 in https://hackmd.io/@alexhkurz/S1R1F6_1yx
+
+2) For a b c d, the reduction occurs in a left-associative manner: a b c d → (((a b) c) d). Each application applies the leftmost term to the next in sequence, creating nested applications.
+   For (a), it's a single variable wrapped in parentheses, which reduces to a as there are no further applications or abstractions.
+
+3) Capture-avoiding substitution ensures that when substituting a variable, it doesn't inadvertently capture free variables.
+   This involves renaming bound variables to prevent conflicts, a common issue in lambda calculus interpreters.
+   The substitute function receives three parameters: The expression in which substitution occurs, the variable being replaced, and the expression replacing the variable.
+   For application expressions (e.g., a b), it recursively applies substitution to both the function and argument. The Lambda abstraction is where the capture avoiding substitution comes into play.
+   The interpreter checks for conflicts, and a fresh variable name is generated to replace the conflicting bound variable. After renaming, substitution proceeds within the lambda body with the newly renamed variable.
+
+4) Generally, the interpreter provides the expected results when handling basic lambda expressions and straightforward applications. However, more complex expressions with multiple nested applications or ones that involve intricate substitutions may sometimes yield unexpected results if there are any implementation issues with capture-avoiding substitution or recursive application handling.
+   Not all computations reduce to normal form. Some expressions, particularly those involving self-application lead to infinite loops because they lack a terminating condition.
+   For other expressions designed to terminate, like Church numerals in basic operations, the interpreter generally reaches normal form as expected.
+
+5) An example of such an expression is the "omega combinator" 
+\begin{verbatim} ((\x. x x) (\x. x x)) \end{verbatim} 
+   which results in an infinite loop of self-application.
+   I added this to test.lc to observe this non-terminating behaviour in order to identify it as the MWE.
+
+6) I followed the instruction as per, for the next two items.
+
+7) The substitutions were seen at the breakpoints. A concise version of the same is below;
+    \begin{verbatim}
+      (\n.(m n))
+      (m n)
+      (m Var1)
+      ((\f.(\x.(f (f x)))) Var1)
+      (\f.(\x.(f (f x))))
+      (f (f x))
+      (f (f Var3))
+      (\Var3.(Var2 (Var2 Var3)))
+      (Var2 (Var2 Var3))
+      (Var2 Var3)
+      (Var2 (Var2 Var4))
+      (\Var4.(Var2 (Var2 Var4)))
+      (Var2 (Var2 Var4))
+      (Var2 (Var2 Var5))
+    \end{verbatim}
+
+8) The trace is written out below;
+    \begin{verbatim}
+      13 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+        40 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+        40 (\m.(\n.(m n)))
+          54 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+            46 (\Var1.((\f.(\x.(f (f x)))) Var1))
+              54 ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+              54 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+            46 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+        40 (\Var2.(\Var4.(Var2 (Var2 Var4))))
+          54 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+            46 (\Var5.((\f.(\x.(f (f (f x))))) ((\f.(\x.(f (f (f x))))) Var5)))
+          54 ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+          54 (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f (f (f x))))))
+    \end{verbatim}
+
+Discord Question: Capture avoiding substitution seems to be a fundamental theme to lambda calculus interpreters, but I still have problems understanding how to best implement it in Python. What other resources can I use to further understand its implementation?
+
+\subsection{Week 9}
+\subsubsection*{Notes}
+In week 9 we continued to speak about the interpreter and modifying it. We also read about three languages - BLOOP, FLOOP, and GLOOP in order to further our understanding of recursion. 
+
+\subsubsection*{Homework}
+For homework 10 we reflected on the previous week's homework: 8-9, as well as our group programming assignment 3. My reflection is given below.
+
+1) I found keeping track of the trace was one of the most challenging parts of the homework. I was not completely sure of where exactly my breakpoints needed to be for exercise 7 and I had to do it multiple times to formulate a readable answer. However, this helped me understand what exctly was happening through the debugging process.
+2) We took our time with the exercise and then spoke about it as a group before coming up with our key insight, realising that our evaluation strategy really matters.
+3) My most intersting takeaway is that despite python being my most used language, there are still some seemingly necessary things that I am not aware of. I certainly want to master using these skills in order to be able to use them in my day to day coding. I rely on print statements more than I apparently should, and that is something I would have never expected to find out this way.
+
+Discord Question: Many developers rely on print statements, but it seems like breakpoints and the debug console can provide more control and insight. What is the best way to make the switch over to using those, and should I completely stop relying on print statements?
+
+\subsection{Week 10}
+\subsubsection*{Notes}
+In week 10 we spoke about Algorithms as Rewriting Systems (ARSs) and the homework reflects exercises regarding the same.
+
+\subsubsection*{Homework}
+For homework 11 we worked on ARSs given a list to work with. my work for the same is below.
+
+\textbf{Question:}
+
+For each of the 8 possible combinations of the properties confluent (\( C \)), terminating (\( T \)), and having unique normal forms (\( UNF \)), determine whether such an ARS exists. Provide an example if possible, or explain why it cannot exist. For the examples, draw the ARS diagrams.
+
+\textbf{Answer:}
+
+\textbf{1. Confluent: True, Terminating: True, Unique Normal Forms: True}
+
+\textit{Example:}
+
+Consider the ARS with elements \( S = \{ a, b, c \} \) and reduction rules:
+
+\[
+  a \to b, \quad b \to c
+\]
+
+\textit{Diagram:}
+
+\begin{center}
+  \begin{tikzpicture}[node distance=2cm, ->, >=stealth, auto]
+    \node (A) {\( a \)};
+    \node (B) [right of=A] {\( b \)};
+    \node (C) [right of=B] {\( c \)};
+    \draw (A) to (B);
+    \draw (B) to (C);
+  \end{tikzpicture}
+\end{center}
+
+\textit{Analysis:}
+
+- \textbf{Terminating:} Yes, all reduction sequences eventually reach \( c \), which is a normal form.
+- \textbf{Confluent:} Yes, there are no diverging reduction paths.
+- \textbf{Unique Normal Forms:} Yes, every element reduces to \( c \), the unique normal form.
+
+
+\textbf{2. Confluent: True, Terminating: True, Unique Normal Forms: False}
+
+\textit{Explanation:}
+
+This combination is \textbf{impossible}. In a confluent and terminating ARS, every element reduces to a unique normal form. Therefore, unique normal forms must exist.
+
+
+\textbf{3. Confluent: True, Terminating: False, Unique Normal Forms: True}
+
+\textit{Example:}
+
+Consider the ARS \( S = \{ a, b, c \} \) and rules:
+
+\[
+  a \to b, \quad b \to a, \quad a \to c, \quad b \to c
+\]
+
+\textit{Diagram:}
+
+\begin{center}
+  \begin{tikzpicture}[node distance=2cm, ->, >=stealth, auto]
+    \node (A) {\( a \)};
+    \node (B) [right of=A] {\( b \)};
+    \node (C) [below of=A, node distance=1.5cm] {\( c \)};
+    \draw (A) to (B);
+    \draw (B) to (A);
+    \draw (A) to (C);
+    \draw (B) to (C);
+  \end{tikzpicture}
+\end{center}
+
+\textit{Analysis:}
+
+- \textbf{Terminating:} No there is an infinite loop between \( a \) and \( b \)
+- \textbf{Confluent:} Yes, both \( a \) and \( b \) reduce to \( c \), and any divergent paths converge at \( c \).
+- \textbf{Unique Normal Forms:} Yes, all elements reduce to \( c \), the unique normal form.
+
+
+\textbf{4. Confluent: True, Terminating: False, Unique Normal Forms: False}
+
+\textit{Example:}
+
+Consider the ARS with elements \( S = \{ a, b \} \) and rules:
+
+\[
+  a \to b, \quad b \to a
+\]
+
+\textit{Diagram:}
+
+\begin{center}
+  \begin{tikzpicture}[node distance=2cm, ->, >=stealth, auto]
+    \node (A) {\( a \)};
+    \node (B) [right of=A] {\( b \)};
+    \draw (A) to (B);
+    \draw (B) to (A);
+  \end{tikzpicture}
+\end{center}
+
+\textit{Analysis:}
+
+- \textbf{Terminating:} No, there is an infinite loop between \( a \) and \( b \).
+- \textbf{Confluent:} Yes, there are no diverging paths; the reductions cycle between \( a \) and \( b \).
+- \textbf{Unique Normal Forms:} No, neither \( a \) nor \( b \) is a normal form, and there are no normal forms in \( S \).
+
+
+\textbf{5. Confluent: False, Terminating: True, Unique Normal Forms: True}
+
+\textit{Explanation:}
+
+This combination is \textbf{impossible}. If an ARS has unique normal forms, it must be confluent.
+
+
+\textbf{6. Confluent: False, Terminating: True, Unique Normal Forms: False}
+
+\textit{Example:}
+
+Consider the ARS \( S = \{ a, b, c \} \) and rules:
+
+\[
+  a \to b, \quad a \to c
+\]
+
+\textit{Diagram:}
+
+\begin{center}
+  \begin{tikzpicture}[->, >=stealth, auto]
+    \node (A) at (0,0) {\( a \)};
+    \node (B) at (2,1) {\( b \)};
+    \node (C) at (2,-1) {\( c \)};
+    \draw (A) to (B);
+    \draw (A) to (C);
+  \end{tikzpicture}
+\end{center}
+
+\textit{Analysis:}
+
+- \textbf{Terminating:} Yes, reductions terminate at \( b \) or \( c \), which are normal forms.
+- \textbf{Confluent:} No, from \( a \), we can reach two different normal forms, \( b \) and \( c \), which are not joinable.
+- \textbf{Unique Normal Forms:} No, the element \( a \) has two distinct normal forms.
+
+
+\textbf{7. Confluent: False, Terminating: False, Unique Normal Forms: True}
+
+\textit{Explanation:}
+
+This combination is \textbf{impossible}. Unique normal forms imply that the ARS is confluent and normalising.
+
+
+\textbf{8. Confluent: False, Terminating: False, Unique Normal Forms: False}
+
+\textit{Example:}
+
+Consider the ARS with elements \( S = \{ a, b, c \} \) and rules:
+
+\[
+  a \to b, \quad b \to a, \quad a \to c
+\]
+
+\textit{Diagram:}
+
+\begin{center}
+  \begin{tikzpicture}[->, >=stealth, auto]
+    \node (A) at (0,1) {\( a \)};
+    \node (B) at (2,1) {\( b \)};
+    \node (C) at (1,0) {\( c \)};
+    \draw (A) to (B);
+    \draw (B) to (A);
+    \draw (A) to (C);
+  \end{tikzpicture}
+\end{center}
+
+\textit{Analysis:}
+
+- \textbf{Terminating:} No, there is an infinite loop between \( a \) and \( b \).
+- \textbf{Confluent:} No, from \( a \), we can either loop indefinitely between \( a \) and \( b \), or reduce to \( c \).
+- \textbf{Unique Normal Forms:} No, \( c \) is a normal form reachable from \( a \), but \( b \) and \( a \) do not reduce to \( c \) if we stay in the loop.
+
+Discord Question: In what real-world applications would rewriting systems provided unique advantages over other types of algorithms?
+
+\subsection{Week 11}
+\subsubsection*{Notes}
+In week 11 we covered some string rewriting exercises while talking about operational and denotational semantics.
+
+\subsubsection*{Homework}
+For homework 12 we put our methodical learning into practice in order to learn the method of decidability via rewriting to normal form and the method of invariants. Questions 1- 5b were assigned for this.
+
+\textbf{Exercise 1:}
+\begin{verbatim}
+The rewrite rule is:
+  ba -> ab
+a) Why does the ARS terminate?
+b) What is the result of a computation (the normal form)?
+c) Show that the result is unique (the ARS is confluent).
+d) What specification does this algorithm implement?
+\end{verbatim}
+
+\textbf{Answer 1:}
+\begin{verbatim}
+a) Each rewrite ba->ab reduces disorder. The string is finite, so rewriting stops when no ba remains.
+b) The normal form is the string in which all occurrences of b appear after all occurrences of a.
+c) The ARS is confluent if for any string, all rewriting sequences eventually lead to the same final 
+   result (normal form). Here, the system is confluent because no matter how the rule ba->ab is applied, 
+   the final result will always be the lexicographically ordered string because the rewrite rule 
+   consistently moves a's to the left and b's to the right.
+d) This algorithm implements sorting, placing all a's before all b's.
+\end{verbatim}
+
+\textbf{Exercise 2:}
+\begin{verbatim}
+Rewrite rules are
+  aa -> a
+  bb -> a
+  ab -> b
+  ba -> b 
+a) Why does the ARS terminate?
+b) What are the normal forms?
+c) Is there a string s that reduces to both a and b?
+d) Show that the ARS is confluent.
+The next questions have all essentially the same answer:
+e) Replacing -> by =, which words become equal?
+f) Can you describe the equality = without making reference to the four rules above?
+g) Can you repeat the last item using modular arithmetic?
+h) Which specification does the algorithm implement?
+\end{verbatim}
+
+\textbf{Answer 2:}
+\begin{verbatim}
+a) The rewriting rules reduce the string's length, as every rewrite replaces two characters with one, 
+   eventually causing it to terminate.
+b) The normal forms are a and b as no rewrite rules apply to a single character.
+c) No, this does not exist.
+d) The ARS is confluent because, regardless of the rewrite order, all reduction paths lead to the same 
+   unique normal form.
+e) Any two strings reduce to the same normal form (a or b), so they are equal under this equivalence 
+   relation.
+f) Two strings are equivalent if their counts of a and b modulo 2 are the same.
+g) A string's equivalence is determined by the count of a mod 2 and the count of b mod 2. Strings with 
+   the same parities of a and b are equal.
+h) It implements a parity check on the counts of a and b, reducing strings to one of two equivalence 
+   classes: a or b.
+\end{verbatim}
+
+\textbf{Exercise 3:}
+\begin{verbatim}
+Rewrite rules are
+  aa -> a
+  bb -> b
+  ba -> ab
+  ab -> ba
+a) Why does the ARS not terminate?
+b) What are the normal forms?
+c) Modify the ARS so that it is terminating, has unique normal forms (and still the same equivalence 
+   relation).
+d) Describe the specification implemented by the ARS.
+\end{verbatim}
+
+\textbf{Answer 3:}
+\begin{verbatim}
+a} The rules ba -> ab and ab -> ba create an infinite loop because they allow back-and-forth rewriting
+   without reducing the length or modifying the structure of the string.
+b) The ARS does not have normal forms because it can endlessly rewrite ab and ba without reaching a 
+   stable state.
+c) The modified rules would be;
+   aa -> a
+   bb -> b
+   ba -> ab
+d) The ARS implements lexicographical sorting of a and b, while reducing sequences of identical 
+   characters to a single character. It achieves the equivalence relation where strings with the same 
+   counts of a and b reduce to the same normal form.
+\end{verbatim}
+
+\textbf{Exercise 4:}
+\begin{verbatim}
+Rewrite rules are
+  ab -> ba
+  ba -> ab
+Same questions as above. (This is a variation of Exse 1.)
+\end{verbatim}
+
+\textbf{Answer 4:}
+\begin{verbatim}
+a) The rules ba -> ab and ab -> ba create an infinite loop because they allow back-and-forth rewriting
+   without reducing the length or modifying the structure of the string.
+b) There are no normal forms because the ARS does not terminate, due to the same reason.
+c) The modified rules would be;
+   ab -> ba
+d) The ARS implements a lexicographical ordering of the string by sorting ab to ba. It ensures that all 
+   strings end in the lexicographically smaller arrangement of a and b.
+\end{verbatim}
+
+\textbf{Exercise 5:}
+\begin{verbatim}
+Consider the rewrite rules
+  ab -> ba
+  ba -> ab
+  aa ->
+  b ->
+a) Reduce some example strings such as abba and bababa.
+b) Why is the ARS not terminating?
+c) How many equivalence classes does ⟷* have? Can you describe them in a nice way? What are the normal 
+   forms?
+   [Hint: It may be easier to first answer the next question.]
+d) Can you change the rules so that the ARS becomes terminating without changing its equivalence
+   classes?
+e) Write down a question or two about strings that can be answered using the ARS. Think about whether 
+   this 
+   amounts to giving a semantics to the ARS.
+   [Hint: The best answers are likely to involve a complete invariant.]
+\end{verbatim}
+
+\textbf{Answer 5:}
+\begin{verbatim}
+a) They both loop indefinitely as you can see; abba->ab -> ba -> ab..., bababa->bab -> aba -> bab...
+b) The rules ba -> ab and ab -> ba create an infinite loop because they allow back-and-forth rewriting
+   without reducing the length or modifying the structure of the string.
+c) There are 4 equivalence classes based on these modulo counts:
+   (0, 0) - Even count of both a and b.
+   (1, 0) - Odd a, even b.
+   (0, 1) - Even a, odd b.
+   (1, 1) - Odd a and b.
+   The normal forms are strings reduced to either the empty string (if aa -> and b -> apply fully) or  
+   a single character representing the final parity:
+   a for (1, 0)
+   b for (0, 1)
+   ab or ba for (1, 1)
+   Empty string for (0, 0).
+d) Yes, firstly I would remove the ab->ba and ba->ab rules and use;
+   aa ->
+   b ->
+   ab ->
+e) Q1. Does the string have an odd or even number of a's and b's?
+   Q2. What is the equivalence class of a given string?
+\end{verbatim}
+
+\textbf{Exercise 5b:}
+\begin{verbatim}
+As Exse 5, but change aa -> to aa -> a.
+\end{verbatim}
+
+\textbf{Answer 5b:}
+\begin{verbatim}
+a) They both loop indefinitely as you can see; abba -> ab -> ba -> ab..., bababa->bab -> aba -> bab...
+b) The rules ba -> ab and ab -> ba create an infinite loop because they allow back-and-forth rewriting
+   without reducing the length or modifying the structure of the string.
+c) The equivalence classes remain the same as in Exse 5, as the new rule does not affect the 
+   equivalence relation.
+   With the modified rule aa -> a, the normal forms are:
+    a for (1, 0)
+    b for (0, 1)
+    ab or ba for (1, 1) (depending on how the cycle is resolved).
+    Empty string for (0, 0).
+d) Yes, firstly I would remove the ab->ba and ba->ab rules and use;
+   aa -> a
+   b ->
+e) Q1. Does the string have an odd or even count of as or bs?
+   Q2. What is the smallest lexicographical representative of the string's equivalence class?
+\end{verbatim}
+
+Discord Question: Are rules like ab -> ba and ba -> ab that create infinite loops ever useful, or should they always be avoided? So far most of our work with them has been related to replacing them to create terminating ARSs.
+
+\subsection{Week 12}
+\subsubsection*{Notes}
+In week 12 we spoke about the fixed point combinator, discussed differences between let and let rec, and tested the functionality by taking the example of the factorial.
+
+\subsubsection*{Homework}
+For homework 13 we put the same example into practice and wrote out how it would be done.
+
+Compute fact 3
+
+\begin{verbatim}
+  GENERAL DEFINITION
+
+- (let f = e1 in 2) = (\f.e2) e1              # def of let
+- (let rec f = e, in e2) = fix(\fe1)) e2      # def of let rec
+- (fix F) = f(fix f)                          # def of fix
+
+ABBREVIATION
+
+F = (\fact. \n. if n=0 then 1 else n*fact (n-1))
+
+COMPUTATION
+
+let rec fact = \n. if n=0 then 1 else n* fact(n-1) in fact 3
+
+= (let fact = (fix (\fact. \n. if n=0 then 1 else n* fact(n-1))) in fact 3) 
+
+= (let fact = (fix F) in fact 3)                                             #using def of fix
+
+= (\fact. fact 3)(fix F)                                                     #using def of let
+
+= (fix F) 3                                                                  #using beta reduction
+
+= F(fix F) 3                                                                 #computation of fix 
+
+= (\fact. \n. if n=0 then 1 else n* fact(n-1)) (fix F) 3                     #using def of F
+
+= (if 3=0 then 1 else 3 * (fix F) 2                                          #using beta reduction
+
+= 3 * ((fix F) 2)
+
+= etc
+\end{verbatim}
+
+Discord Question: What happens if you attempt to use fix with a non-terminating function? Will it just lack efficiency, or would it not work at all?
+
+\section{Lessons from the Group Assignments and Project}
+
+Working on the group assignments and projects for this course provided me with a deeper understanding of programming language concepts, the importance of testing, and the value of collaboration in solving complex problems.
+
+My primary contribution in Milestone 1, where we developed a basic interpreter for lambda calculus and arithmetic, involved writing and adding test cases for our interpreter and ensuring they ran correctly. Here, I designed and executed tests for operations such as addition, subtraction, and nested expressions. This task emphasized the importance of exhaustive testing in validating correct order of precedence and lazy evaluation. For example, ensuring expressions like \x.\y.x y behaved correctly revealed how subtle changes in evaluation strategies could break expected behavior.
+
+In Milestone 2, I extended my work on test cases to verify new features, including conditional expressions (if-then-else), recursive definitions (let rec), and the fix combinator. The lecture really helped with understanding this concept, and I remember the factorial example we took later as well which helped me understand the role and implementation of fic and let rec. This milestone introduced challenges in ensuring the interpreter could handle recursion effectively. I tested edge cases for recursive functions such as factorial, observing how the fix combinator guarantees the resolution of self-referential calls. This deepened my understanding of recursion and its formal implementation, reinforcing its role in functional programming languages.
+
+While test cases were my primary focus, I also contributed to debugging and understanding the overall interpreter implementation. In particular, I collaborated with my teammates to identify and resolve issues with precedence and parenthetical expressions during Milestone 2. This experience highlighted the need for careful grammar design in ambiguous contexts. With the detail on different rules I realized how small modifications to grammar could simplify or complicate the overall evaluation process.
+
+For Milestone 3, I supported the integration of sequencing (;) and list operations (hd, tl, cons, nil). Adding test cases for sequencing proved particularly insightful, as it involved ensuring that expressions like 1;2;3 returned the correct order of evaluations. Testing lists required validating operations like destructuring and ensuring correctness of head (hd) and tail (tl) behavior. Through this, I gained exposure to language constructs for data structures and their formal semantics.
+
+One particularly valuable example was during Milestone 3, where we implemented sequencing and list operations as mentioned above. While testing these features, I observed how sequencing allows multiple expressions to be evaluated in a specified order, which is fundamental for combining computations in many programming languages. This simple addition mirrored concepts seen in real-world programming, where order of operations can determine program behavior. Similarly, implementing list operations highlighted the elegance of functional programming: complex structures like lists could be reduced to fundamental operations like hd and tl, which act as building blocks for more advanced constructs. These examples reinforced how seemingly abstract theoretical concepts, such as expression evaluation and data structure manipulation, directly translate into practical tools for designing powerful and expressive programming languages.
+
+The milestone projects also provided a deeper appreciation for the theory behind programming languages, particularly concepts from lambda calculus and fixed-point combinators. Implementing features like let rec and fix during Milestone 2 helped me see how recursion is grounded in formal theory. Understanding that the fix combinator is a way to express self-referential definitions allowed me to connect theoretical ideas to practical implementations of recursion. Similarly, the interpreter's handling of lazy evaluation in Milestone 1 highlighted the importance of evaluation strategies, such as call-by-name and call-by-value, which are central to many programming paradigms. These theoretical underpinnings gave me a more rigorous understanding of how programming languages manage computation and function calls.
+
+The projects as a whole reinforced several key lessons:
+
+- Testing is critical: Writing robust test cases not only verifies correctness but also exposes subtle errors that may not appear during manual testing.
+
+- Recursion and fixed points: Implementing and testing recursive features deepened my understanding of concepts like the fix combinator and their significance in lambda calculus.
+
+- Grammar design and precedence: I learned the importance of carefully designing ambiguous grammars to avoid errors in parsing and evaluation.
+
+- Collaboration: Group work allowed us to combine our individual strengths. By focusing on testing, I was able to contribute meaningfully while also learning from others who worked on grammar rules or interpreter implementation.
+
+Overall, the projects demonstrated how theoretical concepts like lambda calculus, recursion, and evaluation strategies translate into practical programming language implementations. These lessons will continue to inform my approach to designing, testing, and debugging systems in the future.
+
+\section{Conclusion}\label{conclusion}
+
+This course offered a deep dive into the theoretical and practical aspects of programming languages, bridging abstract mathematical concepts with real-world implementation challenges. Through lectures, group projects, and homework assignments, I developed a clearer understanding of core principles like lambda calculus, recursion, evaluation strategies, and rewriting systems.
+
+The class showed how programming languages are built on a solid foundation of mathematics and logic. Beyond the technical skills I gained—such as debugging, testing, and interpreter design—it also highlighted the importance of understanding semantics and formal reasoning when implementing systems.
+
+I found the discussion of fixed-point combinators particularly insightful. Seeing how recursion, a foundational tool in programming, can be implemented formally using constructs like fix was insightful. Similarly, exploring ambiguous grammars and the role of precedence made me realise the importance of formal syntax design in programming languages.
+
+I also spent time working with the Lean Games Server, which was both an enjoyable and educational experience. The interactive nature of the server helped me practice and learn Lean's syntax in a hands-on way. By solving puzzles and writing proofs, I gained a clearer understanding of how Lean formalizes logic and mathematics. However, I found the syntax and rules of Lean to be quite confusing at times, especially when it came to applying tactics in the correct order or understanding error messages. Despite the occasional challenges, the Lean Games Server gave me a solid foundation in formal reasoning and proof construction, which reinforced many of the theoretical concepts discussed in class.
+
+The projects also revealed the value of careful collaboration and problem-solving in a team setting. My work on test cases complemented the contributions of others working on grammar rules or interpreter functionality, and our discussions often helped clarify complex concepts. This experience taught me to approach programming challenges systematically, breaking problems into smaller tasks while keeping the broader system in mind.
+
+The group projects, in particular, allowed me to see how these theoretical ideas can be implemented. Writing test cases for grammar rules, recursive functions, and list operations revealed the importance of systematic testing in validating both correctness and edge cases. For instance, handling expressions like let rec or ensuring sequencing operations evaluated in the correct order reinforced the practical challenges of implementing interpreters for functional languages.
+
+In the future, I believe the knowledge from this course will help me approach programming problems with a more analytical mindset. Whether designing a new feature, debugging a system, or analyzing the correctness of a program, I will carry forward the lessons learned from this class.
+
+Overall, this course has provided a strong foundation in programming languages, both theoretically and practically, while encouraging critical thinking, collaboration, and precision—skills that are invaluable in the wider world of software engineering.
+
+\end{document}
